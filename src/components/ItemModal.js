@@ -1,4 +1,11 @@
-import { Box, Stack, Typography, Button, TextField, Modal } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Typography,
+  Button,
+  TextField,
+  Modal,
+} from "@mui/material";
 
 const modalStyle = {
   position: "absolute",
@@ -25,45 +32,60 @@ const ItemModal = ({
   setItemCategory,
   itemQuantity,
   setItemQuantity,
-}) => (
-  <Modal
-    open={open}
-    onClose={handleClose}
-    aria-labelledby="modal-modal-title"
-    aria-describedby="modal-modal-description"
-  >
-    <Box sx={modalStyle}>
-      <Typography id="modal-modal-title" variant="h6" component="h2">
-        Add Item
-      </Typography>
-      <Stack width="100%" direction="row" spacing={2}>
+}) => {
+  const resetForm = () => {
+    setItemName("");
+    setItemName("");
+    setItemQuantity("");
+  };
+
+  return (
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={modalStyle}>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+          Add Item
+        </Typography>
+        <Stack width="100%" direction="row" spacing={2}>
+          <TextField
+            label="Item"
+            variant="outlined"
+            fullWidth
+            value={itemName}
+            onChange={(e) => setItemName(e.target.value)}
+          />
+          <TextField
+            label="Category"
+            variant="outlined"
+            fullWidth
+            value={itemCategory}
+            onChange={(e) => setItemCategory(e.target.value)}
+          />
+        </Stack>
         <TextField
-          label="Item"
+          label="Quantity"
           variant="outlined"
-          fullWidth
-          value={itemName}
-          onChange={(e) => setItemName(e.target.value)}
+          type="number"
+          value={itemQuantity}
+          onChange={(e) => setItemQuantity(e.target.value)}
         />
-        <TextField
-          label="Category"
-          variant="outlined"
-          fullWidth
-          value={itemCategory}
-          onChange={(e) => setItemCategory(e.target.value)}
-        />
-      </Stack>
-      <TextField
-        label="Quantity"
-        variant="outlined"
-        type="number"
-        value={itemQuantity}
-        onChange={(e) => setItemQuantity(e.target.value)}
-      />
-      <Button variant="contained" onClick={addItem}>
-        Add
-      </Button>
-    </Box>
-  </Modal>
-);
+        <Button
+          variant="contained"
+          onClick={() => {
+            addItem();
+            handleClose();
+            resetForm();
+          }}
+        >
+          Add
+        </Button>
+      </Box>
+    </Modal>
+  );
+};
 
 export default ItemModal;

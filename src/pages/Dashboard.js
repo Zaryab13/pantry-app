@@ -103,12 +103,13 @@ const Dashboard = () => {
 
   return (
     <Box
-      width="100vw"
-      height="100vh"
+      width="100%"
+      maxWidth="800px"
+      height="fit-content"
       display="flex"
+      margin="0 auto"
       justifyContent="center"
       flexDirection="column"
-      alignItems="center"
       gap={2}
       p={2}
     >
@@ -151,7 +152,7 @@ const Dashboard = () => {
           itemQuantity={itemQuantity}
           setItemQuantity={setItemQuantity}
         />
-        <Grid container padding='10px' spacing={2}>
+        <Grid container padding="10px" spacing={2}>
           {displayedItems.map((item) => (
             <Grid item xs={12} sm={6} md={4} key={item.id}>
               <ItemCard item={item} removeItem={removeItem} />
